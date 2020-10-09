@@ -81,7 +81,6 @@ const Signup = () => {
     loading: false,
   });
 
-
   const {
     firstName, lastName, email, password, loading,
   } = formData;
@@ -105,27 +104,23 @@ const Signup = () => {
     <Wrapper >
       <Row>
         <Col lg={true}>
-          <Header>WELCOME TO INVENTORY CO.</Header>
-          <p>Our inventory application, like modern examples around the web, Is a tool used by manufacturing customers to log their day to day operations, from orders, to products and shipping. It is, at its core, a database management tool, that help manufacturers make better sense of their hectic production line.
-</p>
+          <Header>WELCOME TO BREWERY CO.</Header>
+          <p>This is where we produce the best of the best drinks to turn your day up and make it a fun filled day.</p>
         </Col>
         <Col lg={true}>
           <FormCon>
             <Form onSubmit={(e) => onSubmit(e)} >
-              <input type="text" placeholder='first name' name='firstName' onChange={(e) => onChange(e)} value={firstName} />
-              <input type="text" placeholder='last name' name='lastName' onChange={(e) => onChange(e)} value={lastName} />
-              <input type="email" placeholder='email' name='email' onChange={(e) => onChange(e)} value={email} />
-              <input type="password" placeholder='password' name='password' onChange={(e) => onChange(e)} value={password} />
+              <input type="text" placeholder='first name' name='firstName' required onChange={(e) => onChange(e)} value={firstName} />
+              <input type="text" placeholder='last name' name='lastName' required onChange={(e) => onChange(e)} value={lastName} />
+              <input type="email" placeholder='email' name='email' required onChange={(e) => onChange(e)} value={email} />
+              <input type="password" placeholder='password' name='password' required onChange={(e) => onChange(e)} value={password} />
               <ButtonContainer >
                 <Button variant="outline-primary" type='submit' >{loading ? <Loader /> : 'Signup'}</Button>
               </ButtonContainer>
             </Form>
           </FormCon>
-
         </Col>
       </Row>
-
-
     </Wrapper>
   );
 };

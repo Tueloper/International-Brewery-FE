@@ -119,7 +119,7 @@ class Navv extends React.Component {
             <Contents>
               <Svg>
                 <Link to={'/'}>
-                  Inventory Co.
+                  Brewery Test
                 </Link>
               </Svg>
               <ListContainer>

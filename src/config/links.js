@@ -2,7 +2,7 @@ const links = {
   navLinks: [
     {
       name: 'Login',
-      url: '/',
+      url: '/login',
     },
     {
       name: 'Signup',
