@@ -62,15 +62,12 @@ export const postSignUp = (
     email,
     password,
   };
-
-  // console.log(body);
   try {
     const res = await axios.post(`${REACT_APP_API_URL}v1.0/api/auth/signup`, body);
     dispatch({
       type: POST_SIGN_UP,
       payload: res.data.data.user,
     });
-    // dispatch(getVerificationStatus());
     dispatch(loadUser());
     dispatch(setAlert('success', 'success'));
   } catch (err) {

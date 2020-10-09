@@ -1,12 +1,17 @@
+/* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable arrow-body-style */
 import React, { useState, useEffect } from 'react';
 import {
   Col, Row, Form, Button,
 } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 import { Screen, Basics } from 'styles';
 import { ReactComponent as Loader } from './svg/loader.svg';
+import { postSignUp } from '../redux/action/auth';
+import Alert from './alert';
 
 const Wrapper = styled.div`
 display: content
@@ -72,7 +77,7 @@ justify-content: center;
 align-items: center
 `;
 
-const Signup = () => {
+const Signup = ({ postSignUp, auth: { isAuthenticated, loader } }) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -86,20 +91,27 @@ const Signup = () => {
   } = formData;
 
   useEffect(() => {
-    if (loading) {
-      setTimeout(() => {
-        setFormData({ ...formData, loading: false });
-      }, 2000);
+    if (!loader) {
+      setFormData({ ...formData, loading: false });
     }
     // eslint-disable-next-line
-  }, [loading]);
+  }, [loader]);
+
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     setFormData({ ...formData, loading: true });
-    // console.log(formData);
+    // return console.log(formData);
+    await postSignUp({
+      firstName, lastName, email, password,
+    });
+    setFormData({ ...formData, loading: false });
   };
+  if (isAuthenticated) {
+    return <Redirect to='/login' />;
+  }
+
   return (
     <Wrapper >
       <Row>
@@ -110,6 +122,7 @@ const Signup = () => {
         <Col lg={true}>
           <FormCon>
             <Form onSubmit={(e) => onSubmit(e)} >
+            <Alert />
               <input type="text" placeholder='first name' name='firstName' required onChange={(e) => onChange(e)} value={firstName} />
               <input type="text" placeholder='last name' name='lastName' required onChange={(e) => onChange(e)} value={lastName} />
               <input type="email" placeholder='email' name='email' required onChange={(e) => onChange(e)} value={email} />
@@ -125,4 +138,8 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+const mapStateToProps = (state) => ({
+  auth: state.Auth,
+});
+
+export default connect(mapStateToProps, { postSignUp })(Signup);
