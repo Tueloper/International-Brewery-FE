@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Basics, Screen } from 'styles';
 import { links } from 'config';
-import { Logo } from 'components/svg';
+import { Container } from 'react-bootstrap';
 
 const NavContainer = styled.div`
   position: fixed;
@@ -14,8 +15,10 @@ const NavContainer = styled.div`
   top: 0;
   left: 0;
   margin: 0 auto;
-  background-color: ${Basics.colors.washBlue};
+  background-color: #fff;
+  opacity: 0.85
   width: 100%;
+  z-index: 1000
   transition: ${Basics.transition};
   ${Screen.largePhone`
     height: 80px;
@@ -34,48 +37,50 @@ const Transition = styled.div`
   }
 `;
 const Svg = styled.header`
-  position: absolute;
-  margin-top: 10px;
-  margin-left: 300px;
+font-family: ${Basics.fonts.PeaceSans};
+color: #4187E6
+display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 24px
   svg {
     fill: ${Basics.colors.solidBlue};
     width: 30px;
     height: 30px;
   }
-  ${Screen.tablet`
-    margin-left: 50px;
-  `};
-  ${Screen.miniTablet`
-    margin-top: 35px;
-    margin-left: 20px;
+  ${Screen.largePhone`
+  font-size: 18px;
   `};
 `;
 const ListContainer = styled.div`
   font-size: ${Basics.fontSize.small};
-  position: absolute;
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
-  right: 270px;
-  font-weight: 550;
+  font-weight: 700;
+  justify-content: center;
+  align-items: center;
   ${Screen.largePhone`
-  margin-top: 15px;
-  right: 10px;
+  font-size: 15px;
   `};
 `;
 
 const NavList = styled.div`
   height: 23px;
-  padding-right: 50px;
+  padding-left: 50px;
   ${Screen.largePhone`
-    padding-right: 30px;
+  padding-left: 30px;
   `};
   ${Screen.smallPhone`
-    padding-right: 15px;
+  padding-left: 15px;
   `};
 `;
 
-export default class Nav extends React.Component {
+const Contents = styled.div`
+display: flex;
+justify-content: space-between
+`;
+
+class Navv extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -110,16 +115,25 @@ export default class Nav extends React.Component {
     return (
       <Transition>
         <NavContainer className={this.state.show ? 'active' : 'hidden'}>
-        <Svg>
-          <Link to={'/'}>
-            <Logo />
-          </Link>
-        </Svg>
-          <ListContainer>
-            {navs}
-          </ListContainer>
+          <Container>
+            <Contents>
+              <Svg>
+                <Link to={'/'}>
+                  Inventory Co.
+                </Link>
+              </Svg>
+              <ListContainer>
+                {navs}
+              </ListContainer>
+            </Contents>
+          </Container>
         </NavContainer>
       </Transition>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  auth: state.Auth,
+});
+export default connect(mapStateToProps, {})(Navv);
