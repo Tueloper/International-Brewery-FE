@@ -82,22 +82,11 @@ export const postSignUp = (
 export const postLogIn = (email, password, history) => async (dispatch) => {
   try {
     const res = await axios.post(`${REACT_APP_API_URL}v1.0/api/auth/login`, { email, password });
-    const decoded = jwt_decode(res.data.data.token);
-    // console.log(decoded);
-
+    // const decoded = jwt_decode(res.data.data.token);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data.data.token,
     });
-
-    // dispatch(getVerificationStatus());
-    dispatch(loadUser());
-    if (decoded.companyId === null) {
-      history.push('/company_signup');
-    }
-    if (decoded.companyId !== null) {
-      history.push('/');
-    }
     dispatch(setAlert('success', 'success'));
   } catch (err) {
     { err.message.startsWith('Network') ? dispatch(setAlert(err.message, 'danger')) : dispatch(setAlert(err.response.data.error.message, 'danger')); }

@@ -1,16 +1,17 @@
 /* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable arrow-body-style */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Col, Row, Form, Button,
 } from 'react-bootstrap';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Redirect } from 'react-router-dom';
 import { Screen, Basics } from 'styles';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { ReactComponent as Loader } from './svg/loader.svg';
-import { postSignUp } from '../redux/action/auth';
+// import Shapes from '../images/login.png';
+import { postLogIn } from '../redux/action/auth';
 import Alert from './alert';
 
 const Wrapper = styled.div`
@@ -18,22 +19,58 @@ display: content
 p{
   font-weight: 500
 }
+img{
+  max-width: 100%;
+   height: auto;
+}
+${Screen.pc`
+// height: 81vh
+`}
 ${Screen.tablet`
+img{
+  // width: 70%
+}
+.row{
+  flex-direction: column-reverse
+}
 p{
 margin-bottom: 100px
 }
+`}
+${Screen.miniTablet`
+height: auto
+p{
+margin-bottom: 100px
+}
+// overflow: auto
 `}
 ${Screen.screen425`
 height: auto
 `}
 `;
-const Header = styled.h1`
+const Title = styled.h1`
 font-family: ${Basics.fonts.PeaceSans};
 color: #4187E6
+text-align: center;
+margin-bottom: 50px;
+${Screen.tablet`
+margin-top: 50px;
+margin-bottom: 20px;
+`}
 ${Screen.largePhone`
 font-size: 35px
 `}
 `;
+// const Header = styled.div`
+// width: 100%
+// ${Screen.tablet`
+// text-align: center
+// `}
+// ${Screen.largePhone`
+// // display: none
+// `}
+// `;
+
 const FormCon = styled.div`
 display: flex
 justify-content: flex-end
@@ -61,8 +98,11 @@ input::placeholder{
 ${Screen.screen993`
 justify-content: center
 `}
+${Screen.tablet`
+margin-top: 100px
+`}
 ${Screen.largePhone`
-margin-bottom: 50px
+margin-bottom: 20px
 form{
   width: 100%
 }
@@ -76,61 +116,44 @@ justify-content: center;
 align-items: center
 `;
 
-const Signup = ({ postSignUp, auth: { isAuthenticated, loader } }) => {
+const Login = ({ postLogIn, history }) => {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
-    loading: false,
+    loading2: false,
   });
 
   const {
-    firstName, lastName, email, password, loading,
+    email, password, loading2,
   } = formData;
-
-  useEffect(() => {
-    if (!loader) {
-      setFormData({ ...formData, loading: false });
-    }
-    // eslint-disable-next-line
-  }, [loader]);
 
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setFormData({ ...formData, loading: true });
-    // return console.log(formData);
-    await postSignUp({
-      firstName, lastName, email, password,
-    });
-    setFormData({ ...formData, loading: false });
+    setFormData({ ...formData, loading2: true });
+    await postLogIn(email, password, history);
+    setFormData({ ...formData, loading2: false });
   };
-  if (isAuthenticated) {
-    return <Redirect to='/login' />;
-  }
 
   return (
     <Wrapper >
       <Row>
         <Col lg={true}>
-          <Header>WELCOME TO BREWERY CO.</Header>
-          <p>This is where we produce the best of the best drinks to turn your day up and make it a fun filled day.</p>
+          <Title>Brewery CO.</Title>
         </Col>
         <Col lg={true}>
           <FormCon>
             <Form onSubmit={(e) => onSubmit(e)} >
-            <Alert />
-              <input type="text" placeholder='first name' name='firstName' required onChange={(e) => onChange(e)} value={firstName} />
-              <input type="text" placeholder='last name' name='lastName' required onChange={(e) => onChange(e)} value={lastName} />
-              <input type="email" placeholder='email' name='email' required onChange={(e) => onChange(e)} value={email} />
-              <input type="password" placeholder='password' name='password' required onChange={(e) => onChange(e)} value={password} />
+              <Alert />
+              <input type="email" placeholder='email' name='email' onChange={(e) => onChange(e)} value={email} />
+              <input type="password" placeholder='password' name='password' onChange={(e) => onChange(e)} value={password} />
               <ButtonContainer >
-                <Button variant="outline-primary" type='submit' >{loading ? <Loader /> : 'Signup'}</Button>
+                <Button variant="outline-primary" type='submit' >{loading2 ? <Loader /> : 'Login'}</Button>
               </ButtonContainer>
             </Form>
           </FormCon>
+
         </Col>
       </Row>
     </Wrapper>
@@ -141,4 +164,4 @@ const mapStateToProps = (state) => ({
   auth: state.Auth,
 });
 
-export default connect(mapStateToProps, { postSignUp })(Signup);
+export default connect(mapStateToProps, { postLogIn })(withRouter(Login));
