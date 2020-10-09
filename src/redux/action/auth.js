@@ -12,7 +12,7 @@ import {
   POST_SIGN_UP, POST_SIGN_UP_FAIL, LOAD_USER_FAIL, LOAD_USER,
   LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT,
 } from '../actionTypes/authTypes';
-import setAuthToken from '../../utils/setToken';
+// import setAuthToken from '../../utils/setToken';
 import { setAlert } from './alert';
 
 const { REACT_APP_API_URL } = process.env;
