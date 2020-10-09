@@ -48,7 +48,14 @@ const GlobalStyle = createGlobalStyle`
   }
   @font-face {
     font-family: 'Baloo Bhaina';
-    src: url(${Fonts.BalooBhainaRegullarTTF}) format ('truetype');
+    src: url(${Fonts.BalooBhainaRegullarTTF}) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: auto;
+  }
+  @font-face {
+    font-family: 'PeaceSans';
+    src: url(${Fonts.PeaceSans}) format('truetype');
     font-weight: normal;
     font-style: normal;
     font-display: auto;
@@ -70,10 +77,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: ${Basics.colors.deepBlue};
-    text-decoration: none;
-    text-decoration-skip-ink: auto;
-    position: relative;
+    // color: ${Basics.colors.deepBlue};
+    text-decoration: none !important;
+    // text-decoration-skip-ink: auto;
+    // position: relative;
     transition: ${Basics.transition};
     cursor: pointer;
 
@@ -84,22 +91,22 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  p {
-    font-size: 13px;
-    font-family: ${Basics.fonts.NotoSans};
-    color: ${Basics.colors.chalkBlue};
-    font-weight: 900;
-    word-spacing: 2px;
+  // p {
+  //   font-size: 13px;
+  //   font-family: ${Basics.fonts.PeaceSans};
+  //   color: ${Basics.colors.chalkBlue};
+  //   font-weight: 400;
+  //   word-spacing: 2px;
 
-  }
+  // }
 
-  ol { 
+  ol {
     counter-reset: item;
     list-style-type: none;
     margin-left: -2.5em;
   }
-  li { 
-    display: block; 
+  li {
+    display: block;
     font-size: 28px;
     font-family: ${Basics.fonts.BalooBhaina};
     color: ${Basics.colors.deepBlue};
@@ -111,8 +118,8 @@ const GlobalStyle = createGlobalStyle`
     `};
   }
 
-  li:before { 
-    content: counter(item, decimal-leading-zero) ". "; 
+  li:before {
+    content: counter(item, decimal-leading-zero) ". ";
     counter-increment: item;
     color: ${Basics.colors.deepBlue};
     font-weight: 400;

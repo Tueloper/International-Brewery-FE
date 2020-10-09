@@ -5,6 +5,7 @@ import NotoSansItalicTTF from 'fonts/NotoSans/NotoSans-Italic.ttf';
 import NotoSansRegularTTF from 'fonts/NotoSans/NotoSans-Regular.ttf';
 import LilitaOneRegularTTF from 'fonts/LilitaOne/LilitaOne-Regular.ttf';
 import BalooBhainaRegullarTTF from 'fonts/BalooBhaina/BalooBhaina-Regular.ttf';
+import PeaceSans from 'fonts/PeaceSans/PeaceSansWebfont.ttf';
 
 export {
   MonotonRegularTTF,
@@ -14,4 +15,5 @@ export {
   NotoSansRegularTTF,
   LilitaOneRegularTTF,
   BalooBhainaRegullarTTF,
+  PeaceSans,
 };
