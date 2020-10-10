@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line consistent-return
 const uploadImage = async (e, name) => {
   try {
@@ -7,7 +6,7 @@ const uploadImage = async (e, name) => {
     data.append('file', e);
     data.append('upload_preset', `${name}`);
     const res = await fetch(
-      'https://api.cloudinary.com/v1_1/zicli-synergy-ltd/image/upload',
+      'https://api.cloudinary.com/v1_1/kodehauz/image/upload',
       {
         method: 'POST',
         body: data,
@@ -21,6 +20,5 @@ const uploadImage = async (e, name) => {
     console.log(err);
   }
 };
-
 
 export default uploadImage;
