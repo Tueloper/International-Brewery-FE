@@ -68,6 +68,7 @@ export default (state = initialState, { type, payload }) => {
         loadVerification: true,
         verificationStatus: null,
         loginError: true,
+        userProfile: null,
       };
     case UPDATE_PASSWORD_ERROR:
       return {

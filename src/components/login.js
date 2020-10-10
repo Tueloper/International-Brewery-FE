@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components';
 import { Screen, Basics } from 'styles';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import { ReactComponent as Loader } from './svg/loader.svg';
 // import Shapes from '../images/login.png';
 import { postLogIn } from '../redux/action/auth';
@@ -116,7 +116,7 @@ justify-content: center;
 align-items: center
 `;
 
-const Login = ({ postLogIn, history }) => {
+const Login = ({ postLogIn, history, auth: { isAuthenticated } }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -135,6 +135,10 @@ const Login = ({ postLogIn, history }) => {
     await postLogIn(email, password, history);
     setFormData({ ...formData, loading2: false });
   };
+
+  if (isAuthenticated) {
+    return <Redirect to='/profile' />;
+  }
 
   return (
     <Wrapper >

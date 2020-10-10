@@ -217,7 +217,7 @@ margin : 0 auto
 `;
 
 const Profile = ({
-  updatePassword, setAlert, getProfile, profile: { profileLoader, userProfile, userProfileError },
+  updatePassword, setAlert, getProfile, profile: { profileLoader, userProfile, userProfileError, isAuthenticated },
 }) => {
   const [formData, setFormData] = useState({
     oldPassword: '',
@@ -247,8 +247,11 @@ const Profile = ({
   };
 
   useEffect(() => {
-    getProfile();
-  }, [getProfile]);
+    if (isAuthenticated) {
+      getProfile();
+    }
+  // eslint-disable-next-line
+  }, [isAuthenticated]);
 
   return (
     <>
