@@ -29,7 +29,7 @@ height: auto
 `;
 const Header = styled.h1`
 font-family: ${Basics.fonts.PeaceSans};
-color: #4187E6
+color: #F44C49
 ${Screen.largePhone`
 font-size: 35px
 `}
@@ -108,7 +108,9 @@ const Signup = ({ postSignUp, auth: { isAuthenticated, loader } }) => {
     setFormData({ ...formData, loading: false });
   };
   if (isAuthenticated) {
-    return <Redirect to='/profile' />;
+    setTimeout(() => {
+      return <Redirect to='/profile' />;
+    }, 3000);
   }
 
   return (
@@ -127,7 +129,7 @@ const Signup = ({ postSignUp, auth: { isAuthenticated, loader } }) => {
               <input type="email" placeholder='email' name='email' required onChange={(e) => onChange(e)} value={email} />
               <input type="password" placeholder='password' name='password' required onChange={(e) => onChange(e)} value={password} />
               <ButtonContainer >
-                <Button variant="outline-primary" type='submit' >{loading ? <Loader /> : 'Signup'}</Button>
+                <Button variant="outline-danger" type='submit' >{loading ? <Loader /> : 'Signup'}</Button>
               </ButtonContainer>
             </Form>
           </FormCon>
