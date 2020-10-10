@@ -48,7 +48,7 @@ const FormCon = styled.div`
     padding: .375rem 1rem;
     font-size: 1rem;
     font-weight: 400;
-    color: #495057;
+    color: #F44C49;
     background-color: #fff;
     background-clip: padding-box;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -65,7 +65,7 @@ const FormCon = styled.div`
     padding: .375rem 1rem;
     font-size: 1rem;
     font-weight: 400;
-    color: #495057;
+    color: #F44C49;
     background-color: #fff;
     background-clip: padding-box;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;

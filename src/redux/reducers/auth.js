@@ -39,7 +39,6 @@ export default (state = initialState, { type, payload }) => {
         loading: false,
       };
     case POST_SIGN_UP:
-      localStorage.setItem('token', payload.token);
       return {
         ...state,
         token: payload.token,
@@ -48,7 +47,6 @@ export default (state = initialState, { type, payload }) => {
         loader: false,
       };
     case LOGIN_SUCCESS:
-      localStorage.setItem('token', payload);
       return {
         ...state,
         token: payload,

@@ -50,7 +50,7 @@ height: auto
 `;
 const Title = styled.h1`
 font-family: ${Basics.fonts.PeaceSans};
-color: #4187E6
+color: #F44C49
 text-align: center;
 margin-bottom: 50px;
 ${Screen.tablet`
@@ -153,7 +153,7 @@ const Login = ({ postLogIn, history, auth: { isAuthenticated } }) => {
               <input type="email" placeholder='email' name='email' onChange={(e) => onChange(e)} value={email} />
               <input type="password" placeholder='password' name='password' onChange={(e) => onChange(e)} value={password} />
               <ButtonContainer >
-                <Button variant="outline-primary" type='submit' >{loading2 ? <Loader /> : 'Login'}</Button>
+                <Button variant="outline-danger" type='submit' >{loading2 ? <Loader /> : 'Login'}</Button>
               </ButtonContainer>
             </Form>
           </FormCon>

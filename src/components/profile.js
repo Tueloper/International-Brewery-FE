@@ -102,7 +102,7 @@ const FormCon = styled.div`
     padding: .375rem 1rem;
     font-size: 1rem;
     font-weight: 400;
-    color: #495057;
+    color: #F44C49;
     background-color: #fff;
     background-clip: padding-box;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -119,7 +119,7 @@ const FormCon = styled.div`
     padding: .375rem 1rem;
     font-size: 1rem;
     font-weight: 400;
-    color: #495057;
+    color: #F44C49;
     background-color: #fff;
     background-clip: padding-box;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
@@ -163,7 +163,7 @@ const FormCon = styled.div`
 const FormHeader = styled.div`
   font-size: 1rem;
   margin-bottom: 20px;
-  color: #3268ae
+  color: #F44C49
   font-weight: 700
 `;
 
@@ -197,7 +197,7 @@ const ProfileDisplay = styled.div`
 const ProfileDetails = styled.h5`
   font-size: 1rem;
   margin-bottom: 20px;
-  color: #3268ae
+  color: #F44C49
   font-weight: 700
   margin: 10px 5px;
 `;
@@ -241,7 +241,7 @@ position: relative;
   width: 150px;
   padding: 10px;
   min-height: 150px;
-  border: 1px solid #5555;
+  border: 1px solid #F44C49;
   border-radius: 4px;
 margin : 0 auto
 // position: relative;
@@ -251,7 +251,7 @@ margin : 0 auto
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #5555
+  color: #F44C49
 }
 #file-input1{
   width: 100%
@@ -401,7 +401,7 @@ const Profile = ({
                     </div>
                   </ProfileImage>
                   <ButtonContainer >
-                    <Button variant="outline-primary" type='submit' >{loading2 ? <Loader /> : 'Update Profile'}</Button>
+                    <Button variant="outline-danger" type='submit' >{loading2 ? <Loader /> : 'Update Profile'}</Button>
                   </ButtonContainer>
                 </Form>
               </FormCon>
@@ -413,7 +413,7 @@ const Profile = ({
                 <ActionBox>
                   <ProfileContainer>
                     {profileLoader && <Loader className='loader'/>}
-                    {userProfileError && <Alert/>}
+                    {/* {userProfileError && <Alert/>} */}
                     {
                       userProfile
                       && <ProfileDisplay>

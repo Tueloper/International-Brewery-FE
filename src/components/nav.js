@@ -39,13 +39,13 @@ const Transition = styled.div`
 `;
 const Svg = styled.header`
 font-family: ${Basics.fonts.PeaceSans};
-color: #4187E6
+color: #F44C49
 display: flex;
     justify-content: center;
     align-items: flex-end;
     font-size: 24px
   svg {
-    fill: ${Basics.colors.solidBlue};
+    fill: ${Basics.colors.bloodRed};
     width: 30px;
     height: 30px;
   }
@@ -110,13 +110,13 @@ class Navv extends React.Component {
   render() {
     const navs = links.navLinks.map(
       (item, i) => <NavList key={i}>
-        <Link to={item.url}>{item.name}</Link>
+        <Link style={{ color: '#F44C49' }} to={item.url}>{item.name}</Link>
       </NavList>,
     );
 
     const authList = (
         <NavList >
-          <Link onClick={this.props.logout} >logout</Link>
+          <Link style={{ color: '#F44C49' }} onClick={this.props.logout} >logout</Link>
         </NavList>
     );
     return (
@@ -125,7 +125,7 @@ class Navv extends React.Component {
           <Container fluid>
             <Contents>
               <Svg>
-                <Link to={'/'}>
+                <Link to={'/'} style={{ color: '#F44C49' }}>
                   Brewery CO.
                 </Link>
               </Svg>

@@ -68,6 +68,7 @@ export const postSignUp = (
   };
   try {
     const res = await axios.post(`${REACT_APP_API_URL}v1.0/api/auth/signup`, body);
+    await localStorage.setItem('token', res.data.data.user.token);
     dispatch({
       type: POST_SIGN_UP,
       payload: res.data.data.user,
@@ -87,6 +88,7 @@ export const postLogIn = (email, password, history) => async (dispatch) => {
   try {
     const res = await axios.post(`${REACT_APP_API_URL}v1.0/api/auth/login`, { email, password });
     // const decoded = jwt_decode(res.data.data.token);
+    await localStorage.setItem('token', res.data.data.token);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data.data.token,
