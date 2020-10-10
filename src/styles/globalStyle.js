@@ -86,7 +86,7 @@ const GlobalStyle = createGlobalStyle`
 
     &:hover,
     &:focus {
-      color: ${Basics.colors.neonBlue};
+      color: ${Basics.colors.bloodRed};
       outline: 0;
     }
   }

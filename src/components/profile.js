@@ -17,6 +17,7 @@ import { updatePassword, getProfile, updateProfile } from '../redux/action/auth'
 import { setAlert } from '../redux/action/alert';
 import Alert from './alert';
 import { ReactComponent as Loader } from './svg/loader.svg';
+import { ReactComponent as plus } from './svg/plus.svg';
 
 const Wrapper = styled.div`
 position: relative
@@ -216,18 +217,32 @@ position: relative;
   position: absolute;
   justify-content: center;
 }
+.overlay > input {
+  display: none;
+}
 .overlay img{
   width: 100%
   height: 100%
   z-index: 1000
+  cursor: pointer
 }
+.overlay label{
+  display: none
+}
+.overlay:hover label{
+  display: contents
+}
+.overlay:hover{
+  background: #56b3bf5e
+  // cursor: pointer
+}
+
 .box{
   width: 150px;
   padding: 10px;
-  background: #fff
   min-height: 150px;
   border: 1px solid #5555;
-  border-radius: 10px;
+  border-radius: 4px;
 margin : 0 auto
 // position: relative;
 }
@@ -237,6 +252,12 @@ margin : 0 auto
   left: 50%;
   transform: translate(-50%, -50%);
   color: #5555
+}
+#file-input1{
+  width: 100%
+  height: 100%
+  z-index: 1000
+  cursor: pointer
 }
 `;
 
@@ -365,7 +386,8 @@ const Profile = ({
                   <ProfileImage>
                     <div className="overlay">
                       <label htmlFor="file-input1">
-                        <img src={userProfile.profileImage} alt="+" style={{ width: '30%', padding: '30px' }} />
+                        {/* <img src={plus} alt="+" style={{ width: '30%', padding: '30px' }} /> */}
+                        <span style={{ width: '30%', padding: '30px' }}>+</span>
                       </label>
                       <input id="file-input1" type="file" onChange={(e) => handleChange(e)} />
                     </div>
@@ -373,7 +395,7 @@ const Profile = ({
                       {
                         profileImage !== null ? <img src={profileImage} alt="" style={{ width: '100%', height: '100%' }} />
                           : <span style={{ fontSize: '12px' }} >
-                            +
+                            Select Image
                       </span>
                       }
                     </div>
