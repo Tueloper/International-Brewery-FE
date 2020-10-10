@@ -108,7 +108,7 @@ const Signup = ({ postSignUp, auth: { isAuthenticated, loader } }) => {
     setFormData({ ...formData, loading: false });
   };
   if (isAuthenticated) {
-    return <Redirect to='/profile' />
+    return <Redirect to='/profile' />;
   }
 
   return (

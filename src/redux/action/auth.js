@@ -15,7 +15,7 @@ import {
   UPDATE_PROFILE, UPDATE_PROFILE_ERROR,
   LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, GET_USER_PROFILE, GET_USER_PROFILE_ERROR, UPDATE_PASSWORD_ERROR,
 } from '../actionTypes/authTypes';
-// import setAuthToken from '../../utils/setToken';
+import setAuthToken from '../../utils/setToken';
 import uploadImg from '../../utils/upload';
 import { setAlert } from './alert';
 
@@ -110,6 +110,9 @@ export const logout = () => async (dispatch) => {
 
 export const getProfile = () => async (dispatch) => {
   try {
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
     let res = await axios.get(`${REACT_APP_API_URL}v1.0/api/auth/profile`);
     res = res.data.data.user;
     if (res.birthDate !== null) {
