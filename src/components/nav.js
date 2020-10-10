@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Basics, Screen } from 'styles';
 import { links } from 'config';
 import { Container } from 'react-bootstrap';
+import { logout } from '../redux/action/auth';
 
 const NavContainer = styled.div`
   position: fixed;
@@ -112,18 +113,24 @@ class Navv extends React.Component {
         <Link to={item.url}>{item.name}</Link>
       </NavList>,
     );
+
+    const authList = (
+        <NavList >
+          <Link onClick={this.props.logout} >logout</Link>
+        </NavList>
+    );
     return (
       <Transition>
         <NavContainer className={this.state.show ? 'active' : 'hidden'}>
-          <Container>
+          <Container fluid>
             <Contents>
               <Svg>
                 <Link to={'/'}>
-                  Brewery Test
+                  Brewery CO.
                 </Link>
               </Svg>
               <ListContainer>
-                {navs}
+                {!this.props.auth.isAuthenticated ? navs : authList}
               </ListContainer>
             </Contents>
           </Container>
@@ -136,4 +143,9 @@ class Navv extends React.Component {
 const mapStateToProps = (state) => ({
   auth: state.Auth,
 });
-export default connect(mapStateToProps, {})(Navv);
+
+const mapDispatchToProps = (dispatch) => ({
+  logout: () => dispatch(logout()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navv);

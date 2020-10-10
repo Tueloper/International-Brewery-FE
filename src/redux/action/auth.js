@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable prefer-const */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable consistent-return */
@@ -7,10 +8,12 @@
 // import axios from 'utils/axios';
 import axios from 'axios';
 // eslint-disable-next-line camelcase
+import moment from 'moment';
 import jwt_decode from 'jwt-decode';
 import {
   POST_SIGN_UP, POST_SIGN_UP_FAIL, LOAD_USER_FAIL, LOAD_USER,
-  LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT,
+  // UPDATE_PROFILE, UPDATE_PROFILE_ERROR,
+  LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, GET_USER_PROFILE, GET_USER_PROFILE_ERROR, UPDATE_PASSWORD_ERROR,
 } from '../actionTypes/authTypes';
 // import setAuthToken from '../../utils/setToken';
 import { setAlert } from './alert';
@@ -100,4 +103,41 @@ export const postLogIn = (email, password, history) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   dispatch({ type: LOG_OUT });
   // dispatch({ type: GET_TOKEN_ERROR });
+};
+
+export const getProfile = () => async (dispatch) => {
+  try {
+    let res = await axios.get(`${REACT_APP_API_URL}v1.0/api/auth/profile`);
+    res = res.data.data.user;
+    if (res.birthDate !== null) {
+      const birthDate = moment(res.birthDate).format('L');
+      res = { ...res, birthDate };
+    }
+
+    dispatch({
+      type: GET_USER_PROFILE,
+      payload: res,
+    });
+  } catch (err) {
+    { err.message.startsWith('Network') ? dispatch(setAlert(err.message, 'danger')) : dispatch(setAlert(err.response.data.error.message, 'danger')); }
+    dispatch({
+      type: GET_USER_PROFILE_ERROR,
+      payload: err.response.data.error.message,
+    });
+  }
+};
+
+export const updatePassword = (profile) => async (dispatch) => {
+  const { oldPassword } = profile;
+  try {
+    let res;
+    if (oldPassword) res = await axios.post(`${REACT_APP_API_URL}v1.0/api/auth/reset-password`, profile);
+    dispatch(setAlert(res.data.data.message, 'success'));
+  } catch (err) {
+    { err.message.startsWith('Network') ? dispatch(setAlert(err.message, 'danger')) : dispatch(setAlert(err.response.data.error.message, 'danger')); }
+    dispatch({
+      type: UPDATE_PASSWORD_ERROR,
+      payload: err.response.data.error.message,
+    });
+  }
 };
