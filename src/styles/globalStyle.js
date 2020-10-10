@@ -77,7 +77,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    // color: ${Basics.colors.deepBlue};
+    // color: ${Basics.colors.deepRed};
     text-decoration: none !important;
     // text-decoration-skip-ink: auto;
     // position: relative;
@@ -94,7 +94,7 @@ const GlobalStyle = createGlobalStyle`
   // p {
   //   font-size: 13px;
   //   font-family: ${Basics.fonts.PeaceSans};
-  //   color: ${Basics.colors.chalkBlue};
+  //   color: ${Basics.colors.bloodRed};
   //   font-weight: 400;
   //   word-spacing: 2px;
 
@@ -109,7 +109,7 @@ const GlobalStyle = createGlobalStyle`
     display: block;
     font-size: 28px;
     font-family: ${Basics.fonts.BalooBhaina};
-    color: ${Basics.colors.deepBlue};
+    color: ${Basics.colors.bloodRed};
     font-weight: 500;
     word-spacing: 2px;
 
@@ -121,7 +121,7 @@ const GlobalStyle = createGlobalStyle`
   li:before {
     content: counter(item, decimal-leading-zero) ". ";
     counter-increment: item;
-    color: ${Basics.colors.deepBlue};
+    color: ${Basics.colors.deepRed};
     font-weight: 400;
   }
 `;

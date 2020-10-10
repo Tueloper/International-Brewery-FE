@@ -12,13 +12,14 @@ import moment from 'moment';
 import jwt_decode from 'jwt-decode';
 import {
   POST_SIGN_UP, POST_SIGN_UP_FAIL, LOAD_USER_FAIL, LOAD_USER,
-  // UPDATE_PROFILE, UPDATE_PROFILE_ERROR,
+  UPDATE_PROFILE, UPDATE_PROFILE_ERROR,
   LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, GET_USER_PROFILE, GET_USER_PROFILE_ERROR, UPDATE_PASSWORD_ERROR,
 } from '../actionTypes/authTypes';
 // import setAuthToken from '../../utils/setToken';
+import uploadImg from '../../utils/upload';
 import { setAlert } from './alert';
 
-const { REACT_APP_API_URL } = process.env;
+const { REACT_APP_API_URL, REACT_APP_USER_PROFILE } = process.env;
 
 const check = () => {
   const token = localStorage.getItem('token');
@@ -137,6 +138,34 @@ export const updatePassword = (profile) => async (dispatch) => {
     { err.message.startsWith('Network') ? dispatch(setAlert(err.message, 'danger')) : dispatch(setAlert(err.response.data.error.message, 'danger')); }
     dispatch({
       type: UPDATE_PASSWORD_ERROR,
+      payload: err.response.data.error.message,
+    });
+  }
+};
+
+export const updateProfile = (profile) => async (dispatch) => {
+  let {
+    firstName, profileImage, phoneNumber, upload, lastName, gender,
+  } = profile;
+  // return console.log(profile);
+  try {
+    const up = await uploadImg(upload, REACT_APP_USER_PROFILE);
+    profileImage = up;
+    // console.log(profileImage);
+    const res = await axios.put(`${REACT_APP_API_URL}v1.0/api/auth/profile`, {
+      firstName, profileImage, phoneNumber, lastName, gender,
+    });
+    // return console.log(res);
+    dispatch({
+      type: UPDATE_PROFILE,
+      payload: res.data.data.user,
+    });
+    dispatch(getProfile());
+    dispatch(setAlert('Profile Updated Succesfully', 'success'));
+  } catch (err) {
+    { err.message.startsWith('Network') ? dispatch(setAlert(err.message, 'danger')) : dispatch(setAlert(err.response.data.error.message, 'danger')); }
+    dispatch({
+      type: UPDATE_PROFILE_ERROR,
       payload: err.response.data.error.message,
     });
   }

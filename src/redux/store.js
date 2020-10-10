@@ -14,7 +14,6 @@
 
 // export default store;
 
-
 // for development
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import {
   POST_SIGN_UP, POST_SIGN_UP_FAIL, LOAD_USER_FAIL, LOAD_USER,
-  // UPDATE_PROFILE, UPDATE_PROFILE_ERROR,
+  UPDATE_PROFILE, UPDATE_PROFILE_ERROR,
   LOGIN_SUCCESS, LOGIN_FAIL, LOG_OUT, GET_USER_PROFILE, GET_USER_PROFILE_ERROR, UPDATE_PASSWORD_ERROR,
 } from '../actionTypes/authTypes';
 
@@ -18,6 +18,7 @@ const initialState = {
   profileLoader: true,
   userProfile: null,
   userProfileError: null,
+  updateProfileError: null,
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -89,6 +90,20 @@ export default (state = initialState, { type, payload }) => {
         userProfile: null,
         profileLoader: false,
         userProfileError: payload,
+      };
+    case UPDATE_PROFILE:
+      return {
+        ...state,
+        updateProfile: payload,
+        loading: false,
+        updateProfileError: null,
+      };
+    case UPDATE_PROFILE_ERROR:
+      return {
+        ...state,
+        updateProfile: null,
+        loading: false,
+        updateProfileError: payload,
       };
     default:
       return state;
